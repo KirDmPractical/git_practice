@@ -1,21 +1,68 @@
-﻿// anagram.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include "pch.h"
-#include <iostream>
+﻿#pragma warning(disable:4996)
+#include <windows.h>
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#define _CRT_SECURE_NO_WARNINGS
+void do_anagramm(char *p, char *a, int lenth)
+{
+	int cycle = 0, position;
+	srand(time(NULL));
+	char text[1000];
+	strcpy(text, p);
+	while (cycle < lenth)
+	{
+		int loop = 0;
+		position = rand() % lenth + 0;
+	tryagain:
+		//пропуск знаков, не предусмотренных задачей
+		if (text[position] == '\n' || text[position] == '\0' || text[position] == '.' || text[position] == ' ' || text[position] == '\t' || text[position] == ';' || text[position] == ',' || text[position] == '!' || text[position] == '?')
+		{
+			if (loop == lenth)
+				goto end;
+			if (position == lenth)
+			{
+				position = 0;
+				loop += 1;
+				goto tryagain;
+			}
+			else
+			{
+				position += 1;
+				loop += 1;
+				goto tryagain;
+			}
+		}
+		*(a + cycle) = text[position];
+		text[position] = '.';
+		cycle++;
+	}
+end:
+	*(a + lenth) = '\0';
+}
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	char text[1000];
+	int lenth = 0;
+	printf("Программа превращает полученный текст в анаграмму, игнорируя пробелы и знаки препинания.");
+	printf("\nМаксимальная длинна текста: 1000 знаков\n");
+	printf("Введите ваш текст:\n");
+	//Ввод пользовательского текста посимвольно
+	while (lenth < 1000 && text[lenth - 1] != '\n')
+	{
+		text[lenth] = getchar();
+		lenth += 1;
+	}
+	lenth -= 1;
+	char * anagramm = (char*)malloc(lenth + 1);
+	do_anagramm(&text[0], &anagramm[0], lenth);
+	printf("Полученная анаграмма: ");
+	puts(anagramm);
+	return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
