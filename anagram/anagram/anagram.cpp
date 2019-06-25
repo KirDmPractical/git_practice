@@ -50,7 +50,7 @@ int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	char text[1000];
+	char text[1001];
 	int lenth = 0;
 	printf("Программа превращает полученный текст в анаграмму, игнорируя пробелы и знаки препинания.");
 	printf("\nМаксимальная длинна текста: 1000 знаков\n");
@@ -61,6 +61,7 @@ int main()
 		text[lenth] = getchar();
 		lenth += 1;
 	}
+	text[lenth] = '\0';
 	lenth -= 1;
 	char * anagramm = (char*)malloc(lenth + 1);
 	do_anagramm(&text[0], &anagramm[0], lenth);
