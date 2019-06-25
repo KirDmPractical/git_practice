@@ -1,0 +1,3 @@
+﻿  anagram.cpp
+c:\users\dmitriy\documents\github\git_practice\anagram\anagram\anagram.cpp(14): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  anagram.vcxproj -> C:\Users\dmitriy\Documents\GitHub\git_practice\anagram\Debug\anagram.exe

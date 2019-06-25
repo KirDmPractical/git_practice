@@ -1,4 +1,5 @@
-﻿#pragma warning(disable:4996)
+﻿#include "pch.h"
+#pragma warning(disable:4996)
 #include <windows.h>
 #include <stdio.h>
 #include <locale.h>
@@ -13,6 +14,7 @@ void do_anagramm(char *p, char *a, int lenth)
 	srand(time(NULL));
 	char text[1000];
 	strcpy(text, p);
+	
 	while (cycle < lenth)
 	{
 		int loop = 0;
@@ -41,7 +43,7 @@ void do_anagramm(char *p, char *a, int lenth)
 		cycle++;
 	}
 end:
-	*(a + lenth) = '\0';
+	*(a + cycle) = '\0';
 }
 
 int main()
